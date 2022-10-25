@@ -20,20 +20,27 @@ class App:
         self.e3 = Entry(self.root,textvariable=self.angel)
         self.e3.place(x=300,y=0)
 
-    
-        #values = [int(self.e1.get()),self.e2.get(),self.e3.get()]
-        # Button
         self.button = Button(self.root,text='Click me!',command=lambda: tree(self.size.get(),self.level.get(),self.angel.get()))
         
         self.button.place(x=0,y=0)
 
         self.root.mainloop()
+def fractal(size,levels,angle):
+    if levels == 0:
+        return
+
+    forward(size)
+    fractal(size * 2,levels - 1,angle)
+    left(angle)
+    fractal(size * 0.8,levels-1,angle)
+    right(angle)
+    backward(size)
     
 def tree(size,levels,angle):
     if levels ==0:
-        color('Green')
-        dot(size)
         color('Blue')
+        dot(size)
+        color('Yellow')
         return
     forward(size)
     right(angle)
