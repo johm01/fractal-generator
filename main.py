@@ -12,6 +12,7 @@ class App:
         self.size = IntVar()
         self.level = IntVar()
         self.angel = IntVar()
+
         # Fractal attributes 
         self.e1 = Entry(self.root,textvariable=self.size)
         self.e1.place(x=100,y=0)
@@ -20,7 +21,6 @@ class App:
         self.e3 = Entry(self.root,textvariable=self.angel)
         self.e3.place(x=300,y=0)
 
-    
         #values = [int(self.e1.get()),self.e2.get(),self.e3.get()]
         # Button
         self.button = Button(self.root,text='Click me!',command=lambda: tree(self.size.get(),self.level.get(),self.angel.get()))
@@ -28,22 +28,44 @@ class App:
         self.button.place(x=0,y=0)
 
         self.root.mainloop()
+
+# Koch Curve function 
+def snowflake(size,levels,shorten_factor,angle):
+    if n == 0:
+        forward(size)
+    else:
+        n -= 1
+ 
     
+        size = size / shorten_factor
+        snowflake(size ,levels,shorten_factor,angle)
+        left(angle)
+        snowflake(size ,levels,shorten_factor,angle)
+        right(angle * 2)
+        snowflake(size ,levels,shorten_factor,angle)
+        left(angle)
+        snowflake(size ,levels,shorten_factor,angle)
+
+# Fractal Tree function     
 def tree(size,levels,angle):
     if levels ==0:
         color('Green')
         dot(size)
         color('Blue')
         return
+
+    # Right side 
     forward(size)
     right(angle)
 
     tree(size * 0.8,levels - 1, angle)
 
+    # Left side 
     left(angle *2)
 
     tree(size * 0.8,levels-1,angle)
 
+    # Back to the start 
     right(angle)
     backward(size)
        
