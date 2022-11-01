@@ -4,6 +4,7 @@ import random
 
 class App:
     def __init__(self,title) -> None:
+        # Main app 
         self.root = Tk()
         self.root.title(title)
         self.root.geometry("500x75")
@@ -29,14 +30,15 @@ class App:
 
         self.root.mainloop()
 
-# Koch Curve function 
+# Koch Curve function that draws a snow flake 
 def snowflake(size,levels,shorten_factor,angle):
+    # Checking base recursion case 
     if n == 0:
         forward(size)
     else:
         n -= 1
  
-    
+        # Drawing each side of the snowflake 
         size = size / shorten_factor
         snowflake(size ,levels,shorten_factor,angle)
         left(angle)
