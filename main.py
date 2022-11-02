@@ -47,6 +47,19 @@ def snowflake(size,levels,shorten_factor,angle):
         snowflake(size ,levels,shorten_factor,angle)
         left(angle)
         snowflake(size ,levels,shorten_factor,angle)
+        
+def shape(n,size):
+    if n == 0:
+        dot('red')
+        return
+    forward(size) 
+    left(90)
+    shape(n-1,size)
+    right(45)
+    shape(n-1,size)
+    left(90)
+    shape(n-1,size)
+    backward(size)
 
 # Fractal Tree function     
 def tree(size,levels,angle):
