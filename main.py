@@ -83,7 +83,15 @@ def tree(size,levels,angle):
     # Back to the start 
     right(angle)
     backward(size)
-       
     
+ # Star Function
+ def star(size):
+    if size <= 10:
+        return
+    else:
+        for i in range(5):
+            forward(size)
+            star(size/3)
+            left(110)
 if __name__ == '__main__':
     app = App('Fratcal Tree Maker!')
