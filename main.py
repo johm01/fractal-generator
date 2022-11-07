@@ -1,6 +1,7 @@
 from tkinter import * 
 from turtle import * 
 import random
+import fractals
 
 class App:
     def __init__(self,title) -> None:
@@ -24,74 +25,12 @@ class App:
 
         #values = [int(self.e1.get()),self.e2.get(),self.e3.get()]
         # Button
-        self.button = Button(self.root,text='Click me!',command=lambda: tree(self.size.get(),self.level.get(),self.angel.get()))
+        self.button = Button(self.root,text='Click me!',command=lambda: fractals.tree(self.size.get(),self.level.get(),self.angel.get()))
         
         self.button.place(x=0,y=0)
 
         self.root.mainloop()
 
-# Koch Curve function that draws a snow flake 
-def snowflake(size,levels,shorten_factor,angle):
-    # Checking base recursion case 
-    if n == 0:
-        forward(size)
-    else:
-        n -= 1
- 
-        # Drawing each side of the snowflake 
-        size = size / shorten_factor
-        snowflake(size ,levels,shorten_factor,angle)
-        left(angle)
-        snowflake(size ,levels,shorten_factor,angle)
-        right(angle * 2)
-        snowflake(size ,levels,shorten_factor,angle)
-        left(angle)
-        snowflake(size ,levels,shorten_factor,angle)
-        
-def shape(n,size):
-    if n == 0:
-        dot('red')
-        return
-    forward(size) 
-    left(90)
-    shape(n-1,size)
-    right(45)
-    shape(n-1,size)
-    left(90)
-    shape(n-1,size)
-    backward(size)
 
-# Fractal Tree function     
-def tree(size,levels,angle):
-    if levels ==0:
-        color('Green')
-        dot(size)
-        color('Blue')
-        return
-
-    # Right side 
-    forward(size)
-    right(angle)
-
-    tree(size * 0.8,levels - 1, angle)
-
-    # Left side 
-    left(angle *2)
-
-    tree(size * 0.8,levels-1,angle)
-
-    # Back to the start 
-    right(angle)
-    backward(size)
-    
- # Star Function
- def star(size):
-    if size <= 10:
-        return
-    else:
-        for i in range(5):
-            forward(size)
-            star(size/3)
-            left(110)
 if __name__ == '__main__':
     app = App('Fratcal Tree Maker!')
