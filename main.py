@@ -1,7 +1,7 @@
 from tkinter import * 
 from turtle import * 
 import random
-import fractals
+
 
 class App:
     def __init__(self,title) -> None:
@@ -9,20 +9,21 @@ class App:
        
         self.root = Tk()
         self.root.title(title)
-        self.root.geometry("500x75")
+        self.root.geometry("500x175")
         self.root.resizable(width=False,height=False)
 
         self.size = IntVar()
         self.level = IntVar()
         self.angel = IntVar()
+        self.n = IntVar()
 
         # Fractal attributes 
         self.e1 = Entry(self.root,textvariable=self.size)
-        self.e1.place(x=100,y=0)
+        self.e1.place(x=200,y=0)
         self.e2 = Entry(self.root,textvariable=self.level)
-        self.e2.place(x=200,y=0)
+        self.e2.place(x=300,y=0)
         self.e3 = Entry(self.root,textvariable=self.angel)
-        self.e3.place(x=300,y=0)
+        self.e3.place(x=400,y=0)
 
         self.type = 'Tree'
 
@@ -70,7 +71,7 @@ class App:
         forward(size)
         right(angle)
 
-        self.tree(self,size * 0.8,levels - 1, angle)
+        self.tree(size * 0.8,levels - 1, angle)
 
             # Left side 
         left(angle *2)
@@ -82,21 +83,21 @@ class App:
         backward(size)
 
     # Koch Curve 
-    def koch_curve(self,n,length,shorten_factor,angle):
+    def koch_curve(self,n,size,angle):
 
         # Drawing at the start 
         if n == 0:
-            forward(length)
+            forward(size)
         else:
             n -= 1
         
-            self.koch_curve(n ,length,shorten_factor,angle)
+            self.koch_curve(n,size,angle)
             left(angle)
-            self.koch_curve(n ,length,shorten_factor,angle)
+            self.koch_curve(n,size,angle)
             right(angle * 2)
-            self.koch_curve(n ,length,shorten_factor,angle)
+            self.koch_curve(n,size,angle)
             left(angle)
-            self.koch_curve(n ,length,shorten_factor,angle)
+            self.koch_curve(n,size,angle)
 
     # Custom fractal 
     def shape(self,n,size):
@@ -105,11 +106,11 @@ class App:
             return
         forward(size) 
         left(90)
-        shape(n-1,size)
+        self.shape(n-1,size)
         right(90)
-        shape(n-1,size)
+        self.shape(n-1,size)
         left(90)
-        shape(n-1,size)
+        self.shape(n-1,size)
        
 
 
