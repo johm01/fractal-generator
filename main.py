@@ -46,17 +46,17 @@ class App:
             forward(size)
 
         # Serpinski Triangle
-    def serpinski(self,n,size,angle):
+    def serpinski(self,size,n,angle):
         if n == 1:
             self.triangle(size,angle)
         else:
-            self.serpinski(n - 1,size,angle)
+            self.serpinski(size,n-1,angle)
             right(angle)
             forward(size * 2** (n-2))
-            self.serpinski(n - 1,size,angle)
+            self.serpinski(size,n-1,angle)
             left(angle)
             forward(size * 2** (n-2))
-            self.serpinski(n - 1,size,angle)
+            self.serpinski(size,n-1,angle)
             forward(size * 2** (n-2))
 
         ## Fractal Tree
@@ -70,7 +70,7 @@ class App:
         # Right side 
         forward(size)
         right(angle)
-
+        
         self.tree(size * 0.8,levels - 1, angle)
 
             # Left side 
@@ -83,24 +83,24 @@ class App:
         backward(size)
 
     # Koch Curve 
-    def koch_curve(self,n,size,angle):
+    def koch_curve(self,size,n,angle):
 
         # Drawing at the start 
         if n == 0:
             forward(size)
         else:
             n -= 1
-        
-            self.koch_curve(n,size,angle)
+            
+            self.koch_curve(size,n-1,angle)
             left(angle)
-            self.koch_curve(n,size,angle)
+            self.koch_curve(size,n-1,angle)
             right(angle * 2)
-            self.koch_curve(n,size,angle)
+            self.koch_curve(size,n-1,angle)
             left(angle)
-            self.koch_curve(n,size,angle)
+            self.koch_curve(size,n-1,angle)
 
     # Custom fractal 
-    def shape(self,n,size):
+    def shape(self,n+,size):
         if n == 0:
             dot('red')
             return
@@ -111,6 +111,8 @@ class App:
         self.shape(n-1,size)
         left(90)
         self.shape(n-1,size)
+        reset()
+        
        
 
 
