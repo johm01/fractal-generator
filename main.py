@@ -1,7 +1,7 @@
 from tkinter import * 
 from turtle import * 
 import random
-
+import time 
 
 class App:
     def __init__(self,title) -> None:
@@ -17,13 +17,20 @@ class App:
         self.angel = IntVar()
         self.n = IntVar()
 
-        # Fractal attributes 
+        # Widgets 
         self.e1 = Entry(self.root,textvariable=self.size)
         self.e1.place(x=200,y=0)
         self.e2 = Entry(self.root,textvariable=self.level)
         self.e2.place(x=300,y=0)
         self.e3 = Entry(self.root,textvariable=self.angel)
         self.e3.place(x=400,y=0)
+
+        self.l1 = Label(self.root,text="Size")
+        self.l1.place(x=200,y=20)
+        self.l2 = Label(self.root,text="Levels")
+        self.l2.place(x=300,y=20)
+        self.l3 = Label(self.root,text="Angle")
+        self.l3.place(x=400,y=20)
 
         self.type = 'Tree'
 
@@ -35,6 +42,8 @@ class App:
         self.button_2.place(x=0,y=35)
         self.button_3 = Button(self.root,text='Koch Kurve',command=lambda: self.koch_curve(self.size.get(),self.level.get(),self.angel.get()))
         self.button_3.place(x=0,y=70)
+        self.button_4 = Button(self.root,text='Custom Shape',command=lambda: self.shape(self.size.get(),self.level.get(),self.angel.get()))
+        self.button_4.place(x=0,y=105)
 
 
         self.root.mainloop()
@@ -58,6 +67,7 @@ class App:
             forward(size * 2** (n-2))
             self.serpinski(size,n-1,angle)
             forward(size * 2** (n-2))
+            
 
         ## Fractal Tree
     def tree(self,size,levels,angle):
@@ -70,7 +80,7 @@ class App:
         # Right side 
         forward(size)
         right(angle)
-        
+
         self.tree(size * 0.8,levels - 1, angle)
 
             # Left side 
@@ -81,6 +91,7 @@ class App:
             # Back to the start 
         right(angle)
         backward(size)
+    
 
     # Koch Curve 
     def koch_curve(self,size,n,angle):
@@ -90,29 +101,28 @@ class App:
             forward(size)
         else:
             n -= 1
-            
-            self.koch_curve(size,n-1,angle)
+            self.koch_curve(size,n,angle)
             left(angle)
-            self.koch_curve(size,n-1,angle)
+            self.koch_curve(size,n,angle)
             right(angle * 2)
-            self.koch_curve(size,n-1,angle)
+            self.koch_curve(size,n,angle)
             left(angle)
-            self.koch_curve(size,n-1,angle)
+            self.koch_curve(size,n,angle)
+          
 
     # Custom fractal 
-    def shape(self,n+,size):
+    def shape(self,size,n,angle):
         if n == 0:
             dot('red')
             return
         forward(size) 
-        left(90)
-        self.shape(n-1,size)
-        right(90)
-        self.shape(n-1,size)
-        left(90)
-        self.shape(n-1,size)
-        reset()
-        
+        left(angle)
+        self.shape(size,n-1,angle)
+        right(angle)
+        self.shape(size,n-1,angle)
+        left(angle)
+        self.shape(size,n-1,angle)
+       
        
 
 
